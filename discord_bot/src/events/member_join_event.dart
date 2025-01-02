@@ -18,12 +18,42 @@ class GuildMemberAddHandler extends MineralEvent<MemberJoinEvent> with Environme
 
     if (channel is TextChannel) {
       final embed = EmbedBuilder(
-        title: 'BIENVENUE',
-        description: 'Bienvenue **${event.member.user.globalName}** sur : ** ${event.guild.name}** :tada:',
-          thumbnail: EmbedThumbnail(url: '${event.user.decoration.defaultAvatarUrl}'),
-        color: Color.green_700
+        title: '🎉 **Bienvenue, ${event.member.user.globalName} !** 🎉',  //
+        description: 'Bienvenue sur **${event.guild.name}** ! Nous sommes ravis de t\'accueillir dans notre communauté. 😄\n\n'
+            'Nous espérons que tu passeras un excellent moment ici. N\'hésite pas à te présenter et à participer aux discussions !',
+        thumbnail: EmbedThumbnail(url: '${event.user.decoration.defaultAvatarUrl}'),
+        color: Color.green_700,
+        fields: [
+          EmbedField(
+            name: '<:starz:1323841357462114437> Règles de la communauté',
+            value: 'N\'oublie pas de consulter nos règles dans le salon #règles pour une expérience optimale. <:newspaperz:1323841072241049630>',
+            inline: false,
+          ),
+          EmbedField(
+            name: '🛠️ Besoin d\'aide ?',
+            value: 'Si tu as des questions, n\'hésite pas à demander de l\'aide dans #aide !',
+            inline: false,
+          ),
+        ],
+        footer: EmbedFooter(
+          text: 'Nous espérons que tu passeras un excellent moment parmi nous !',
+          iconUrl: event.guild.icon?.url,
+        ),
+        timestamp: DateTime.now(),
       );
-      await channel.send(embeds: [embed]);
+
+
+      var button = ButtonBuilder.link(
+         'https://mineral-foundation.org',
+          emoji: EmojiBuilder.fromUnicode('📎'),
+          label: 'Rules',
+          disabled: false
+      );
+
+
+      final row = ComponentBuilder()..withButton.only(button);
+
+      await channel.send(embeds: [embed],  components: row);
     } else {
       print("Le salon spécifié n'est pas un salon texte.");
     }

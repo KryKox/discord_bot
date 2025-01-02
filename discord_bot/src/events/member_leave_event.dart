@@ -18,11 +18,18 @@ class GuildMemberRemoveHandler extends MineralEvent<MemberLeaveEvent> with Envir
 
     if (channel is TextChannel) {
       final embed = EmbedBuilder(
-          title: 'AU REVOIR',
-          description: '**${event.member.user.globalName}** vient de quitter le serveur : ** ${event.guild.name}** :sob:',
-          thumbnail: EmbedThumbnail(url: '${event.user.decoration.defaultAvatarUrl}'),
-          color: Color.red_700
+        title: '😢 **Au Revoir, ${event.member.user.globalName} !** 😢',
+        description: '**${event.member.user.globalName}** a quitté le serveur **${event.guild.name}**. Nous sommes tristes de te voir partir ! 😔\n\n'
+            'Merci d\'avoir fait partie de notre communauté. Nous espérons te revoir bientôt !',
+        thumbnail: EmbedThumbnail(url: '${event.user.decoration.defaultAvatarUrl}'),
+        color: Color.red_700,
+        footer: EmbedFooter(
+          text: 'Bonne continuation et à bientôt peut-être !',
+          iconUrl: event.guild.icon?.url,
+        ),
+        timestamp: DateTime.now(),
       );
+
       await channel.send(embeds: [embed]);
     } else {
       print("Le salon spécifié n'est pas un salon texte.");

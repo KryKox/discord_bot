@@ -33,7 +33,7 @@ class HelpCommand extends MineralCommand<GuildCommandInteraction> {
       }
 
       embed.addField(
-        name: ":white_check_mark: | **${capitalize(command.label.uid)}** - __${command.description.uid}__",
+        name: "<:checkmark:1323839325179215912> | **${capitalize(command.label.uid)}** - __${command.description.uid}__",
         value: subcommandsContent.isNotEmpty
             ? subcommandsContent
             : '',
